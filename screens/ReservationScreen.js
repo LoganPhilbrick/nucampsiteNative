@@ -24,7 +24,7 @@ const ReservationScreen = () => {
     setShowModal(!showModal);
   };
 
-  const resertForm = () => {
+  const resetForm = () => {
     setCampers(1);
     setHikeIn(false);
     setDate(new Date());
@@ -65,7 +65,7 @@ const ReservationScreen = () => {
           <Button
             onPress={() => {
               setShowModal(!showModal);
-              resertForm();
+              resetForm();
             }}
             color="#5637DD"
             title="Close"
