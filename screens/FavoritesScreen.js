@@ -1,10 +1,11 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { View, FlatList, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import { Avatar, ListItem } from "react-native-elements";
 import Loading from "../components/LoadingComponent";
 import { baseUrl } from "../shared/baseUrl";
 import { SwipeRow } from "react-native-swipe-list-view";
 import { toggleFavorite } from "../features/favorites/favoritesSlice";
+import * as Animatable from "react-native-animatable";
 
 const FavoritesScreen = ({ navigation }) => {
   const { campsitesArray, isLoading, errMess } = useSelector((state) => state.campsites);
@@ -20,11 +21,11 @@ const FavoritesScreen = ({ navigation }) => {
             onPress={() =>
               Alert.alert(
                 "Delete Favorite?",
-                "Are you sure you wish to delete the favorite campsite" + campsite.name + "?",
+                "Are you sure you wish to delete the favorite campsite " + campsite.name + "?",
                 [
                   {
                     text: "Cancel",
-                    onPress: () => console.log(campsite.name + "Not deleted"),
+                    onPress: () => console.log(campsite.name + "Not Deleted"),
                     style: "cancel",
                   },
                   {
@@ -69,7 +70,11 @@ const FavoritesScreen = ({ navigation }) => {
       </View>
     );
   }
-  return <FlatList data={campsitesArray.filter((campsite) => favorites.includes(campsite.id))} renderItem={renderFavoriteItem} keyExtractor={(item) => item.id.toString()} />;
+  return (
+    <Animatable.View animation="fadeInRightBig" duration={2000}>
+      <FlatList data={campsitesArray.filter((campsite) => favorites.includes(campsite.id))} renderItem={renderFavoriteItem} keyExtractor={(item) => item.id.toString()} />
+    </Animatable.View>
+  );
 };
 
 const styles = StyleSheet.create({

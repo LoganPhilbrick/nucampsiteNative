@@ -1,3 +1,4 @@
+import * as Animatable from "react-native-animatable";
 import { FlatList, StyleSheet, Text, View, Button, Modal } from "react-native";
 import { useState } from "react";
 import RenderCampsite from "../features/campsites/RenderCampsite";
@@ -44,7 +45,7 @@ const CampsiteInfoScreen = ({ route }) => {
   };
 
   return (
-    <>
+    <Animatable.View animation="fadeInUp" duration={2000} delay={1000}>
       <FlatList
         data={comments.commentsArray.filter((comment) => comment.campsiteId === campsite.id)}
         renderItem={renderCommentItem}
@@ -77,7 +78,7 @@ const CampsiteInfoScreen = ({ route }) => {
           </View>
         </View>
       </Modal>
-    </>
+    </Animatable.View>
   );
 };
 
